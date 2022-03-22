@@ -67,15 +67,13 @@ magnetize.TextScaled = true
 magnetize.TextSize = 14.000
 magnetize.TextWrapped = true
 magnetize.MouseButton1Down:Connect(function()
-	if do_action == true then
+	local player = game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart')
+	local user = game.Workspace:FindFirstChild(playerbox.Text)
+	if do_action and user then
 		do_action = false
-		local user = game.Players:WaitForChild(playerbox.Text).Character
-		local player = game.Players.LocalPlayer.Character
-		for i = 0, 1, 0.01 do
+		for i = 0,1,0.01 do
 			wait()
-			local player_humanoidpart = player:WaitForChild('HumanoidRootPart')
-			local user_humanoidpart = user:WaitForChild('HumanoidRootPart')
-			player_humanoidpart.CFrame = player_humanoidpart.CFrame:Lerp(user_humanoidpart.CFrame, i)
+			player.CFrame = player.CFrame:Lerp(user:FindFirstChild('HumanoidRootPart').CFrame, i)
 		end
 		do_action = true
 	end
